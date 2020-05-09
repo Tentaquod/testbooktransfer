@@ -1,0 +1,1181 @@
+
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css">
+		<link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@300&family=Noto+Sans&display=swap" rel="stylesheet">
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+      }
+
+      #header_bg {
+        position: fixed;
+        background: linear-gradient(to bottom right, #3366cc, #56d4d6);
+        width: 100%;
+        height: 100%;
+      }
+
+      #nav_bg {
+        position: fixed;
+        background: linear-gradient(to bottom right, #3366cc, #56d4d6);
+        width: 100%;
+        height: 100%;
+        clip-path: polygon(0 0, 100% 0, 100% 3.96em, 0 3.96em);
+        pointer-events: none;
+        z-index: 2;
+      }
+
+      header{
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-size: cover;
+      }
+
+      nav {
+        position: fixed;
+        margin: 0.5em;
+        margin-top: 1em;
+        white-space: nowrap;
+        width: 100%;
+        z-index: 3;
+      }
+
+			nav ul {
+				display: block;
+			}
+
+			#mobile_bars {
+				color: white;
+				float: left;
+				margin-left: .4em;
+				display: none;
+			}
+
+			#mobile_container_header {
+				position: fixed;
+				width: 100%;
+				height: 100%;
+				top: 0;
+				left: 0;
+				background: #343434;
+				color: white;
+				display: none;
+			}
+
+			#mobile_container_header i {
+				transition: .5s;
+				margin-left: 1em;
+				margin-top: 1em;
+			}
+
+			#mobile_container_header i:hover {
+				transform: rotate(270deg);
+			}
+
+			#mobile_container_header a {
+				transition: .5s;
+				text-align: center;
+				font-family: Tahoma, sans-serif;
+				color: white;
+				text-decoration: none;
+				font-size: 25px;
+			}
+
+			#mobile_container_header a:hover {
+				color: #cdcdcd;
+			}
+
+			#mobile_container_header p {
+				margin-top: .6em;
+			}
+
+      #search_wrapper {
+        position: relative;
+        float: right;
+        margin-right: 1em;
+      }
+
+			#search_wrapper:hover #search, #search:focus, #search:valid {
+				width: 24em;
+			}
+
+      nav img {
+        float: left;
+       width: 10em;
+        margin-right: .5em;
+      }
+
+      nav ul li, #search {
+        display: inline-block;
+        margin-right: 0.5em;
+        padding: 0.75em;
+        padding-top: .45em;
+        padding-bottom: .45em;
+        border-radius: .7em;
+        font-size: 1.3em;
+        font-family: 'Noto Sans', sans-serif;
+      }
+
+      #search {
+        outline: none;
+        border: none;
+        margin: 0;
+        border-radius: 2em;
+        width: 4em;
+        box-shadow: 4px 2px 13px #293133;
+        transition: 0.5s;
+      }
+
+      #search::placeholder {
+        visibility: hidden;
+      }
+
+      #search_wrapper:hover #search, #search:focus, #search:valid {
+        width: 24em;
+      }
+
+      #search_wrapper:hover #search::placeholder, #search:focus::placeholder {
+        visibility: visible;
+      }
+
+
+      #search_icon {
+        position: absolute;
+        right: 0.4em;
+        top: 50%;
+        transform: translateY(-50%);
+        background: linear-gradient(to top left, #f0ba4f, #f5a55b);
+        padding: 0.75em;
+        border-radius: 50%;
+        color: white;
+      }
+
+      nav ul li {
+        transition: .5s;
+        line-height: 1.2;
+      }
+
+      nav ul li:hover {
+      	background-color: white;
+
+      }
+
+      nav ul li a {
+        transition: .5s;
+        color: white;
+        text-decoration: none;
+      }
+
+      nav ul li:hover a {
+        color: #3366cc;
+      }
+
+      #header_sub_title {
+        text-align: center;
+      }
+
+      #header_sub_title p {
+        margin-top: .7em;
+        font-size: 2.5rem;
+        color: white;
+        overflow: hidden;
+        font-family: 'Inconsolata', monospace;
+      }
+
+      #header_title {
+        text-align: center;
+        margin-top: 5.5em;
+      }
+
+      #header_title p{
+        font-size: 5rem;
+        color: white;
+        letter-spacing: 0.1rem;
+        overflow: hidden;
+        font-family: 'Inconsolata', monospace;
+      }
+
+      #header_title p span.type_text{
+        color: #f0ba4f;
+        font-weight: bold;
+      }
+
+      #header_title p span.cursor {
+        display: inline-block;
+        background-color: #ccc;
+        margin-left: 0.1rem;
+        width: 3px;
+        animation: blink 1s infinite;
+      }
+
+      #header_title p span.cursor.typing {
+        animation: none;
+      }
+
+      @keyframes blink {
+        0%  { background-color: #ccc; }
+        49% { background-color: #ccc; }
+        50% { background-color: transparent; }
+        99% { background-color: transparent; }
+        100% }
+
+		#genre_mobile_fixed_container {
+			z-index: 4;
+			display: none;
+			position: fixed;
+			overflow-y: scroll;
+			width: 100%;
+			height: 100%;
+			top: 0;
+			left: 0;
+			background: #343434;
+			color: white;
+			/* display: none; */
+		}
+
+		#genre_mobile_fixed_container i {
+			color: white;
+			margin-top: .7em;
+			margin-left: .7em;
+			font-size: 25px;
+		}
+
+		#genre_mobile_container {
+			width: 100%;
+      display: flex;
+      justify-content: center;
+			margin-top: 1em;
+		}
+
+		#genre_mobile_circle {
+			display: none;
+			box-shadow: 2px 1px 12px #293133;
+      color: white;
+      transition: .5s;
+      text-align: center;
+			background: linear-gradient(to top left, #f0ba4f, #f5a55b);
+      width: 20em;
+      border-radius: 50px;
+      height: 7.5em;
+		}
+		#genre_mobile_circle i {
+      font-size: 3.5em;
+      margin-top: .3em;
+    }
+
+		#genre_mobile_circle:hover {
+			color: #f0ba4f;
+			background: white;
+		}
+
+		#genre_mobile_circle p {
+			font-family: Tahoma, sans-serif;
+			font-size: 25px;
+			margin-top: .2em;
+		}
+
+		#genre_container {
+		  margin-top: 3em;
+		      width: 100%;
+		      display: flex;
+		      justify-content: center;
+				}
+
+				.genre_circle_mobile {
+					display: inline-block;
+					box-shadow: 2px 1px 12px #293133;
+		      color: white;
+		      transition: .5s;
+		      text-align: center;
+					background: linear-gradient(to top left, #f0ba4f, #f5a55b);
+		      width: 6em;
+		      border-radius: 500px;
+		      height: 6em;
+				}
+
+				#exit_genre i{
+					transition: .5s
+				}
+
+				#exit_genre:hover i{
+					transform: rotate(270deg);
+				}
+
+				#genre_container_mobile {
+					text-align: center;
+
+				}
+				.genre_subtitel_mobile {
+				display: inline-block;
+				margin-left: 1em;
+				text-align: center;
+	      width: 6em;
+	      margin-top: .6em;
+				}
+
+				.top_genre_mobile {
+					margin-top: 2.5em;
+				}
+
+				.genre_circle_mobile i {
+					margin-left: 0 !important;
+					margin-top: .35em !important;
+					font-size: 3.5em !important;
+				}
+
+    .genre_circle{
+			box-shadow: 2px 1px 12px #293133;
+      color: white;
+      transition: .5s;
+      text-align: center;
+    }
+
+    .genre_circle:hover {
+      background: white;
+      color: #f0ba4f;
+    }
+
+    .genre_subtitel {
+      text-align: center;
+      width: 10em;
+      margin-top: .6em;
+    }
+
+    .genre_circle i {
+      font-size: 5em;
+      margin-top: .5em;
+    }
+    .top_genre p {
+      color: white;
+      font-size: 22px;
+    }
+
+    .genre_circle {
+      background: linear-gradient(to top left, #f0ba4f, #f5a55b);
+      width: 10em;
+      border-radius: 500px;
+      height: 10em;
+    }
+
+    .top_genre p, .top_genre_mobile p {
+      font-family: Noto Sans, sans-serif;
+
+    }
+
+    .top_genre {
+      float: left;
+      margin-left: 2em;
+
+    }
+
+    #last_genre {
+      margin-right: 2em;
+    }
+
+      	/*HEADER ENDE*/
+
+      main {
+        position: absolute;
+        top: 100%;
+        width: 100%;
+        overflow: hidden;
+        background-color: white;
+        z-index: 1;
+      }
+
+
+    </style>
+    <style>
+
+          .book {
+            border-radius: 7px;
+            margin-left: 1em;
+            margin-top: 2em;
+            margin-bottom: 2em;
+            box-shadow: 5px 3px 80px #bcbcbc;
+           	/*width: 17em;*/
+            height: 23.5em;
+            text-align: center;
+            font-family: "Noto Sans";
+          }
+
+          .book h1 {
+            font-size: 26px;
+            margin-top: 0.1em;
+          }
+
+          .gray_line{
+            margin-top: 0.3em;
+            margin-left: 20%;
+            width: 60%;
+            height: 2px;
+            background-color: #cdcdcd;
+          }
+
+          .book img {
+            margin-top: .9em;
+            width: 15em;
+          }
+          .book p {
+            width: 80%;
+            margin-left: 10%;
+          }
+          .isearch {
+            margin-top: .2em;
+          }
+
+          .user{
+            margin-bottom: .6em;
+          }
+
+          .emp {
+            margin-top: .3em;
+          }
+
+          .ort {
+            margin-top: .3em;
+            margin-bottom: .3em;
+          }
+
+          .ort i {
+            float: left;
+            margin-top: .15em;
+            margin-left: 2em;
+          }
+          .ort p {
+            margin: 0;
+          }
+
+          .price {
+            height: 4em;
+            background: #efefef;
+            text-align: center;
+
+          }
+
+          .price p {
+            line-height: 4em;
+          }
+
+          .price i {
+            transition: .5s;
+            float: right;
+            margin-top: .5em;
+            margin-right: .2em;
+            border-radius: 50px;
+            background: #f0ba4f;
+            padding: .75em;
+            border: 4px solid #f0ba4f;
+            height: 1em;
+            color: #efefef;
+          }
+
+          .price i:hover{
+            background: #efefef;
+            color: #f0ba4f;
+
+          }
+
+      #book_container {
+        margin-right: 1em;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(18em, 1fr));
+        grid-auto-rows: 25.5em;
+
+      }
+
+      #search_parent {
+        display: flex;
+        justify-content: center;
+        margin-top: 5em;
+      }
+      #search_wrapper2 {
+        position: relative;
+      }
+
+      #search2 {
+        padding: 0.75em;
+        padding-top: .45em;
+        padding-bottom: .45em;
+        font-size: 2em;
+        font-family: 'Noto Sans', sans-serif;
+        outline: none;
+        border: none;
+        border-radius: 2em;
+        width: 24em;
+        box-shadow: 4px 2px 13px #293133;
+      }
+
+      #search_icon2 {
+        position: absolute;
+        right: 0.4em;
+        top: 50%;
+        transform: translateY(-50%);
+        background: linear-gradient(to top left, #f0ba4f, #f5a55b);
+        padding: 0.75em;
+        border-radius: 50%;
+        color: white;
+        font-size: 1.5em;
+      }
+
+    </style>
+		<style>
+		@media screen and (max-width: 97em){
+			#header_title p {
+				font-size: 65px;
+			}
+
+			#header_sub_title p{
+				font-size: 35px;
+			}
+
+			#search2 {
+				font-size: 25px;
+			}
+
+			#search_icon2 {
+				font-size: 20px;
+			}
+
+			.genre_circle {
+				width: 8em;
+				height: 8em;
+			}
+
+			.genre_subtitel {
+				width: 8em;
+			}
+
+			.top_genre p {
+				font-size: 18px;
+			}
+
+			  .genre_circle i {
+					margin-top: .5em;
+					font-size: 64px;
+				}
+		}
+
+		@media screen and (max-width: 79em) {
+			#header_title p {
+				font-size: 55px;
+			}
+
+			#header_sub_title p{
+				font-size: 30px;
+			}
+		}
+
+		@media screen and (max-width: 66em) {
+			#header_title p {
+				font-size: 49px;
+			}
+
+			#header_sub_title p{
+				font-size: 25px;
+			}
+
+			#search_parent {
+				margin-top: 1.5em;
+			}
+
+			#search2 {
+				font-size: 22px;
+			}
+
+			#search_icon2 {
+				font-size: 17px;
+			}
+
+			#genre_container {
+				margin-top: 1.5em;
+			}
+
+			.genre_circle {
+				width: 7em;
+				height: 7em;
+			}
+
+			.genre_subtitel {
+				width: 7em;
+			}
+
+			.top_genre p {
+				font-size: 16px;
+			}
+
+			  .genre_circle i {
+					margin-top: .5em;
+					font-size: 57px;
+				}
+
+				nav img {
+	       width: 8em;
+	      }
+
+				nav ul li {
+					margin-right: 0;
+					padding: 0;
+					padding-top: .35em;
+					padding-bottom: .35em;
+					padding-left: .5em;
+					padding-right: .5em;
+					border-radius: 6px;
+				}
+
+				#search {
+					font-size: 17px;
+				}
+
+				#search_icon {
+					font-size: 12px;
+				}
+
+				nav ul li a {
+					font-size: 19px;
+				}
+		}
+
+		@media screen and (max-width: 58em) {
+			#header_title p {
+				font-size: 40px;
+			}
+
+			#header_sub_title p{
+				font-size: 20px;
+			}
+
+			#search2 {
+				font-size: 19px;
+				display: none;
+			}
+
+			#search_icon2 {
+				font-size: 15px;
+				display: none;
+			}
+
+			.genre_circle {
+				width: 6em;
+				height: 6em;
+			}
+
+			.genre_subtitel {
+				width: 6em;
+			}
+
+			.top_genre {
+				margin-left: 1em;
+			}
+
+			#last_genre {
+				margin-right: 1em;
+			}
+
+			.top_genre p {
+				font-size: 14px;
+			}
+
+			  .genre_circle i {
+					margin-top: .5em;
+					font-size: 49px;
+				}
+
+				nav ul {
+					display: none;
+				}
+
+				#mobile_bars {
+					display: block;
+					font-size: 25px;
+					margin-top: .1em;
+					transition: .5s;
+				}
+
+				#mobile_container_header i {
+					font-size: 25px;
+				}
+
+				#mobile_bars:hover, #mobile_bars:active, #mobile_bars:focus {
+					transform: rotate(90deg);
+				}
+
+				#search_wrapper {
+					float: none;
+					margin-left: 2em;
+				}
+				#search::placeholder {
+					visibility: visible;
+				}
+
+				#search {
+					width: 40%;
+				}
+
+				#search_wrapper:hover #search, #search:focus, #search:valid {
+	        width: 40%;
+	      }
+				#genre_mobile_circle {
+					display: block;
+				}
+
+				#genre_container {
+					display: none;
+				}
+		}
+
+		@media screen and (max-width: 48em){
+
+			#header_title p{
+				font-size: 31px;
+			}
+
+			#header_sub_title p {
+				font-size: 16px;
+			}
+
+			nav img {
+			 width: 6em;
+			}
+
+			#search {
+				font-size: 13.5px;
+			}
+
+			#search_icon {
+				font-size: 9px;
+			}
+
+			#search2 {
+				font-size: 16px;
+			}
+
+			#search_icon2 {
+				font-size: 12px;
+			}
+
+			.genre_circle {
+				width: 4.5em;
+				height: 4.5em;
+			}
+
+			.genre_subtitel {
+				width: 4.5em;
+			}
+
+			.top_genre p {
+				font-size: 11px;
+			}
+
+			  .genre_circle i {
+					margin-top: .5em;
+					font-size: 37px;
+				}
+
+				#search {
+					width: 50%;
+				}
+
+				#search_wrapper:hover #search, #search:focus, #search:valid {
+	        width: 50%;
+	      }
+	}
+
+	@media screen and (max-width: 38em) {
+		#header_title p{
+			font-size: 30px;
+		}
+
+		#header_sub_title p {
+			font-size: 13px;
+		}
+
+		#search2 {
+			font-size: 12px;
+		}
+
+		#search_icon2 {
+			font-size: 9px;
+		}
+		#search {
+			width: 55%;
+		}
+
+		#search_wrapper:hover #search, #search:focus, #search:valid {
+			width: 55%;
+		}
+	}
+
+	@media screen and (max-width: 32em) {
+		#header_title p{
+			font-size: 29px;
+		}
+
+		#header_sub_title p {
+			font-size: 12px;
+		}
+
+		#search_parent {
+			margin-top: .8em;
+		}
+
+		#search2 {
+			font-size: 16px;
+		}
+
+		#search_icon2 {
+			font-size: 13px;
+		}
+
+		#search {
+			width: 50%;
+		}
+
+		#search_wrapper:hover #search, #search:focus, #search:valid {
+			width: 50%;
+		}
+		#search_wrapper {
+			margin-left: .7em;
+		}
+
+		#search input {
+			font-size: 12px;
+		}
+
+		#genre_mobile_circle {
+			width: 16em;
+			border-radius: 27px;
+		}
+	}
+
+	@media screen and (max-width: 28em) {
+		#header_title p{
+			font-size: 27px;
+		}
+
+		#header_sub_title p {
+			display: none;
+		}
+
+		#search_parent {
+			margin-top: .7em;
+		}
+
+		#search2 {
+			font-size: 14px;
+		}
+
+		#search_icon2 {
+			font-size: 11px;
+		}
+		#search {
+			width: 45%;
+		}
+
+		#search_wrapper:hover #search, #search:focus, #search:valid {
+			width: 45%;
+		}
+	}
+
+
+	@media screen and (max-width: 25em) {
+		#header_title p{
+			font-size: 25px;
+		}
+
+		#search2 {
+			font-size: 12px;
+		}
+
+		#search_icon2 {
+			font-size: 9px;
+		}
+
+
+			}
+
+	@media screen and (max-width: 22em) {
+		#header_title p{
+			font-size: 21px;
+		}
+
+		#search2 {
+			font-size: 11px;
+		}
+
+		#search_icon2 {
+			font-size: 8px;
+		}
+	}
+		</style>
+
+    <meta charset="utf-8">
+    <title>BookTransfer</title>
+  </head>
+  <body>
+    <!-- Header START -->
+    <div id="header_bg"></div>
+    <div id="nav_bg"></div>
+    <header>
+      <nav>
+        <span id="search_wrapper"><input type="text" id="search" name="buechertausch_search" placeholder="Buchtitel, ISBN oder Autor eingeben" required><i class="fas fa-search" id="search_icon"></i></span>
+        <a href="#"><img src="https://i.imgur.com/AqIRtr0.png"></a>
+				<div id="mobile_bars" onclick="showMobileHeader()"><i class="fas fa-bars"></i></div>
+					<div id="mobile_container_header">
+						<i class="fas fa-times" onclick="hideMobileHeader()"></i>
+						<a href="#"><p>Angebote</p></a>
+						<a href="#"><p>Verkaufen</p></a>
+						<a href="#"><p>Einloggen</p></a>
+						<a href="#"><p>Account erstellen</p></a>
+					</div>
+        <ul>
+          <li><a href="#">Angebote</a></li>
+          <li><a href="#">Verkaufen</a></li>
+          <li><a href="#">Einloggen</a></li>
+          <li><a href="#">Account erstellen</a></li>
+        </ul>
+      </nav>
+    	<div id="header">
+
+        <div id="header_title">
+          <p>Tausche deine Bücher... <br /><span class="type_text"></span><span class="cursor">&nbsp;</span></p>
+        </div>
+        <div id="header_sub_title">
+          <p>BookTransfer - Die Büchertauschplattform für Kinder- und Jugendbücher</p>
+        </div>
+        <div id="search_parent">
+        	<div id="search_wrapper2"><input type="text" id="search2" name="buechertausch_search" placeholder="Buchtitel, ISBN oder Autor eingeben" required><i class="fas fa-search" id="search_icon2"></i></div>
+        </div>
+				<div id="genre_mobile_container">
+					<div id="genre_mobile_circle" onclick="showMobileGenre()">
+					<i class="fas fa-book"></i>
+					<p>
+						Top Genres anzeigen
+					</p>
+					</div>
+				</div>
+				<div id="genre_mobile_fixed_container">
+					<div id="exit_genre"><i class="fas fa-times" onclick="exitMobileGenre()"></i></div>
+					<div id="genre_container_mobile">
+
+	      <div class="top_genre_mobile">
+	        <a href="#"><div class="genre_circle_mobile">
+	        <i class="fas fa-chess-king"></i>
+	        </div></a>
+	        <div class="genre_subtitel_mobile">
+	          <p>
+	            Abenteuer &amp; Fantasy
+	          </p>
+	        </div>
+
+	      </div>
+	      <div class="top_genre_mobile">
+	        <a href="#"><div class="genre_circle_mobile">
+	        <i class="fas fa-bolt"></i>
+	        </div></a>
+	        <div class="genre_subtitel_mobile">
+	          <p>
+	            Action
+	          </p>
+	        </div>
+
+	      </div>
+	      <div class="top_genre_mobile">
+	        <a href="#"><div class="genre_circle_mobile">
+	        <i class="fas fa-heart-broken"></i>
+	        </div></a>
+	        <div class="genre_subtitel_mobile">
+	          <p>
+	            Drama, Liebe &amp; Romantik
+	          </p>
+	        </div>
+
+	      </div>
+	      <div class="top_genre_mobile">
+	        <a href="#"><div class="genre_circle_mobile">
+	        <i class="fas fa-skull"></i>
+	        </div></a>
+	        <div class="genre_subtitel_mobile">
+	          <p>
+	            Grusel &amp; Horror
+	          </p>
+	        </div>
+	      </div>
+				<div class="top_genre_mobile">
+	        <a href="#"><div class="genre_circle_mobile">
+	        <i class="fas fa-laugh-squint"></i>
+	        </div></a>
+	        <div class="genre_subtitel_mobile">
+	          <p>
+	            Humor
+	          </p>
+	        </div>
+	      </div>
+	        </div>
+				</div>
+
+
+	      <div id="genre_container">
+      <div class="top_genre">
+        <a href="#"><div class="genre_circle">
+        <i class="fas fa-chess-king"></i>
+        </div></a>
+        <div class="genre_subtitel">
+          <p>
+            Abenteuer &amp; Fantasy
+          </p>
+        </div>
+
+      </div>
+      <div class="top_genre">
+        <a href="#"><div class="genre_circle">
+        <i class="fas fa-bolt"></i>
+        </div></a>
+        <div class="genre_subtitel">
+          <p>
+            Action
+          </p>
+        </div>
+
+      </div>
+      <div class="top_genre">
+        <a href="#"><div class="genre_circle">
+        <i class="fas fa-heart-broken"></i>
+        </div></a>
+        <div class="genre_subtitel">
+          <p>
+            Drama, Liebe &amp; Romantik
+          </p>
+        </div>
+
+      </div>
+      <div class="top_genre">
+        <a href="#"><div class="genre_circle">
+        <i class="fas fa-skull"></i>
+        </div></a>
+        <div class="genre_subtitel">
+          <p>
+            Grusel &amp; Horror
+          </p>
+        </div>
+
+      </div>
+          <div id="last_genre">
+      <div class="top_genre">
+        <a href="#"><div class="genre_circle">
+        <i class="fas fa-laugh-squint"></i>
+        </div></a>
+        <div class="genre_subtitel">
+          <p>
+            Humor
+          </p>
+        </div>
+      </div>
+      </div>
+        </div>
+      </div>
+    </header>
+    <!-- Header ENDE -->
+
+    <!-- Main START -->
+    <main>
+      <div id="book_container">
+      <div class="book">
+          <div class="book_head"><h1>Harry Potter</h1><div class="user"><p> von <b>Der_Unterstrich</b></p></div></div>
+           <div class="gray_line"></div>
+           <img src="https://www.domradio.de/sites/default/files/symbolbild-buch-veroeffentlichen.jpg">
+           <div class="gray_line"></div>
+           <div class="emp"><p>Ich empfehle dieses Buch zu lesen, weil es spannend...</p></div>
+           <div class="gray_line"></div>
+           <div class="ort"><i class="fas fa-map-marker"></i><p>Dresden, Deutschland</p></div>
+           <div class="price"><p><b>Percy Jackson...</b><i class="fas fa-arrow-right"></i></div>
+           </div>
+        <div class="book">
+          <div class="book_head"><h1>Cronos Cube</h1><div class="user"><p> von <b>bethilde123</b></p></div></div>
+           <div class="gray_line"></div>
+           <img src="https://www.domradio.de/sites/default/files/symbolbild-buch-veroeffentlichen.jpg">
+           <div class="gray_line"></div>
+           <div class="emp"><p>Ich empfehle dieses Buch zu lesen, weil es einfach toll...</p></div>
+           <div class="gray_line"></div>
+           <div class="ort"><i class="fas fa-map-marker"></i><p>Leipzig, Deutschland</p></div>
+           <div class="price"><p><b>Harry Potter ...</b><i class="fas fa-arrow-right"></i></div>
+           </div>
+        <div class="book">
+          <div class="book_head"><h1>Percy Jackson</h1><div class="user"><p> von <b>cenator__</b></p></div></div>
+           <div class="gray_line"></div>
+           <img src="https://www.domradio.de/sites/default/files/symbolbild-buch-veroeffentlichen.jpg">
+           <div class="gray_line"></div>
+           <div class="emp"><p>Ich empfehle dieses Buch zu lesen, weil es so super...</p></div>
+           <div class="gray_line"></div>
+           <div class="ort"><i class="fas fa-map-marker"></i><p>Berlin, Deutschland</p></div>
+           <div class="price"><p><b>Cronos Cube 1</b><i class="fas fa-arrow-right"></i></div>
+           </div>
+      </div>
+    </main>
+    <!-- Main ENDE -->
+		<script>
+		function showMobileHeader(){
+			document.getElementById("mobile_container_header").style.display = "block";
+		}
+
+		function hideMobileHeader(){
+			document.getElementById("mobile_container_header").style.display = "none";
+		}
+
+		function showMobileGenre(){
+			document.getElementById("genre_mobile_fixed_container").style.display = "block";
+		}
+
+		function exitMobileGenre(){
+			document.getElementById("genre_mobile_fixed_container").style.display = "none";
+		}
+		</script>
+    <script>
+const typedTextSpan = document.querySelector(".type_text");
+const cursorSpan = document.querySelector(".cursor");
+
+const textArray = ["schnell", "einfach", "mit anderen", "überall"];
+const typingDelay = 100;
+const erasingDelay = 100;
+const newTextDelay = 2300;
+let textArrayIndex = 0;
+let charIndex = 0;
+
+function type() {
+  if (charIndex < textArray[textArrayIndex].length) {
+    if(!cursorSpan.classList.contains("typing")) cursorSpan.classList.add("typing");
+    typedTextSpan.textContent += textArray[textArrayIndex].charAt(charIndex);
+    charIndex++;
+    setTimeout(type, typingDelay);
+  }
+  else {
+    cursorSpan.classList.remove("typing");
+  	setTimeout(erase, newTextDelay);
+  }
+}
+
+function erase() {
+	if (charIndex > 0) {
+    if(!cursorSpan.classList.contains("typing")) cursorSpan.classList.add("typing");
+    typedTextSpan.textContent = textArray[textArrayIndex].substring(0, charIndex-1);
+    charIndex--;
+    setTimeout(erase, erasingDelay);
+  }
+  else {
+    cursorSpan.classList.remove("typing");
+    textArrayIndex++;
+    if(textArrayIndex>=textArray.length) textArrayIndex=0;
+    setTimeout(type, typingDelay + 1100);
+  }
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+  if(textArray.length) setTimeout(type, newTextDelay + 250);
+});
+    </script>
+
+  </body>
+</html>
